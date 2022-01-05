@@ -74,7 +74,7 @@ def object_detection():
     ##########
 
     st.sidebar.write("### Roboflow: Face Detection App")
-        session_state = SessionState.get(col1=False, col2=False)
+    session_state = SessionState.get(col1=False, col2=False)
 
     col1, col2 = st.beta_columns(2)
 
