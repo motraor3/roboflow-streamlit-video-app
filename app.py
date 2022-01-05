@@ -55,9 +55,9 @@ def main():
     Main part of the script that defines the main method and calls the logo detection.
     Also sets up a logger for debugging purposes.
     """
-    st.header("Real-time Streamlit Logo Detection with Roboflow")
+    st.header("Real-time Face Detection App")
 
-    logo_detection()
+    detection()
 
     logger.debug("=== Alive threads ===")
     for thread in threading.enumerate():
@@ -65,14 +65,14 @@ def main():
             logger.debug(f" {thread.name} ({thread.ident})")
 
 
-def logo_detection():
-    """Streamlit Logo Detection with Roboflow"""
+def detection():
+    """Face Detection with Roboflow"""
 
     ##########
     ##### Set up sidebar
     ##########
 
-    st.sidebar.write("### Streamlit Logo Detection")
+    st.sidebar.write("### Face Detection")
 
     ## Add in sliders.
     CONFIDENCE_THRESHOLD = st.sidebar.slider(
@@ -93,7 +93,7 @@ def logo_detection():
     )
 
     ### Adding in the Streamlit and Roboflow logos to the sidebar
-    image = Image.open("./images/roboflow_logo.png")
+    image = Image.open("./images/roboflow_full_logo_color.png")
     st.sidebar.image(image, use_column_width=True)
 
     image = Image.open("./images/streamlit_logo.png")
@@ -103,9 +103,9 @@ def logo_detection():
     # the overlap and confidence query parameters are set within the
     # RoboflowVideoProcessor class, normally they would be hardcoded here but
     # to get interactivity we had to add them after
-    ROBOFLOW_SIZE = 720
+    ROBOFLOW_SIZE = 416
     url_base = "https://detect.roboflow.com/"
-    endpoint = "merged_logos/2"
+    endpoint = "face-detection-mik1i/5"
     ## remove random part and add your secret key here
     ## Create a .streamlit/secrets.toml with the entry, replacing YourKey with the key from Roboflow: api_key="YourKey"
     ## Don't commit secrets.toml. On Sharing, add the same line to ☰ -> Settings -> Secrets
@@ -115,11 +115,7 @@ def logo_detection():
 
     # Map detected classes to uniquely colored bounding boxes
     color_map = {
-        "dark logo": "#D41159",
-        "old logo": "#1A85FF",
-        "white logo": "#FFC20A",
-        "roboflow_logomark": "#1AFF1A",
-        "roboflow_wordmark": "#582832",
+        "face": "#D41159"
     }
 
     class RoboflowVideoProcessor(VideoProcessorBase):
@@ -188,7 +184,7 @@ def logo_detection():
             image = frame.to_ndarray(format="bgr24")
 
             # Resize (while maintaining the aspect ratio) to improve speed and save bandwidth
-            # roboflow_size is set in logo_detection when we set up the url and query parameters
+            # roboflow_size is set in detection when we set up the url and query parameters
             # hardcoded to 720 currently
             height, width, channels = image.shape
             scale = ROBOFLOW_SIZE / max(height, width)
@@ -230,7 +226,7 @@ def logo_detection():
     # pass the WEBRTC_CLIENT_SETTINGS we choose and tell it to process the video
     # frames using the logic from the RoboflowVideoProcessor class
     webrtc_ctx = webrtc_streamer(
-        key="logo-detection",
+        key="face-detection-mik1i",
         mode=WebRtcMode.SENDRECV,
         client_settings=WEBRTC_CLIENT_SETTINGS,
         video_processor_factory=RoboflowVideoProcessor,
