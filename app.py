@@ -55,7 +55,7 @@ def main():
     Main part of the script that defines the main method and calls the logo detection.
     Also sets up a logger for debugging purposes.
     """
-    
+
     st.header("Real-time Streamlit Face Detection App made with Roboflow")
 
     object_detection()
@@ -226,7 +226,7 @@ def object_detection():
     # pass the WEBRTC_CLIENT_SETTINGS we choose and tell it to process the video
     # frames using the logic from the RoboflowVideoProcessor class
     webrtc_ctx = webrtc_streamer(
-        key="face-detection-mik1i",
+        key="object-detection",
         mode=WebRtcMode.SENDRECV,
         client_settings=WEBRTC_CLIENT_SETTINGS,
         video_processor_factory=RoboflowVideoProcessor,
