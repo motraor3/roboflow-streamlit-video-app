@@ -83,7 +83,7 @@ def object_detection():
     if col1_one or session_state.col1:
         session_state.col1 = True
         session_state.col2 = False
-        choose_InputType = st.selectbox("Choose Map type :", options=['Video', 'Image'], index=1, key='input-roboflow')
+        choose_InputType = st.selectbox("Choose Input type :", options=['Video', 'Image'], index=1, key='input-roboflow')
         if choose_InputType == 'Video':
             st.write("Inference on a video feed")
             feed_type = 'video'
@@ -95,7 +95,7 @@ def object_detection():
         session_state.col1 = False
         session_state.col2 = True
         st.write("Inference on a custom-trained model")
-        choose_InputType_custom = st.selectbox("Choose Map type :", options=['Video', 'Image'], index=1. key='input-custom')
+        choose_InputType_custom = st.selectbox("Choose Input type :", options=['Video', 'Image'], index=1, key='input-custom')
         if choose_InputType_custom == 'Video':
             st.write("Inference on a video feed")
             feed_type = 'video'
