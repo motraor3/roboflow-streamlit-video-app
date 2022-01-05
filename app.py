@@ -40,7 +40,7 @@ from streamlit_webrtc import (
 logger = logging.getLogger(__name__)
 
 #### For the webrtc plug in, this is setting the default values for the widget,
-#### incluing removing the audio
+#### including removing the audio
 WEBRTC_CLIENT_SETTINGS = ClientSettings(
     rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
     media_stream_constraints={
@@ -55,9 +55,15 @@ def main():
     Main part of the script that defines the main method and calls the logo detection.
     Also sets up a logger for debugging purposes.
     """
+<<<<<<< HEAD
     st.header("Real-time Face Detection App")
 
     detection()
+=======
+    st.header("Real-time Streamlit Face Detection App made with Roboflow")
+
+    object_detection()
+>>>>>>> 27b19c9bb825ba9aee21a20e9c2bde37899e8760
 
     logger.debug("=== Alive threads ===")
     for thread in threading.enumerate():
@@ -65,14 +71,23 @@ def main():
             logger.debug(f" {thread.name} ({thread.ident})")
 
 
+<<<<<<< HEAD
 def detection():
     """Face Detection with Roboflow"""
+=======
+def object_detection():
+    """Roboflow: Object Detection Streamlit App"""
+>>>>>>> 27b19c9bb825ba9aee21a20e9c2bde37899e8760
 
     ##########
     ##### Set up sidebar
     ##########
 
+<<<<<<< HEAD
     st.sidebar.write("### Face Detection")
+=======
+    st.sidebar.write("### Roboflow: Face Detection App")
+>>>>>>> 27b19c9bb825ba9aee21a20e9c2bde37899e8760
 
     ## Add in sliders.
     CONFIDENCE_THRESHOLD = st.sidebar.slider(
@@ -115,7 +130,11 @@ def detection():
 
     # Map detected classes to uniquely colored bounding boxes
     color_map = {
+<<<<<<< HEAD
         "face": "#D41159"
+=======
+        "face": "#D41159",
+>>>>>>> 27b19c9bb825ba9aee21a20e9c2bde37899e8760
     }
 
     class RoboflowVideoProcessor(VideoProcessorBase):
