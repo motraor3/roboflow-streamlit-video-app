@@ -133,8 +133,6 @@ def object_detection():
             'https://detect.roboflow.com/face-detection-mik1i/5',
             f'?api_key={st.secrets["api_key"]}',
             '&format=image',
-            f'&overlap={overlap_threshold * 100}',
-            f'&confidence={confidence_threshold * 100}',
             '&stroke=2',
             '&labels=True'
         ])
