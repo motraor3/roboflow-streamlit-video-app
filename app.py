@@ -18,7 +18,6 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 import streamlit as st
-from src.pages.sessionState import SessionState
 from aiortc.contrib.media import MediaPlayer
 
 import requests
@@ -74,16 +73,13 @@ def object_detection():
     ##########
 
     st.sidebar.write("### Roboflow: Face Detection App")
-    session_state = SessionState.get(col1=False, col2=False)
-
     col1, col2 = st.beta_columns(2)
-
-    col1_one = col1.button("ROBOFLOW TRAIN", key="1")
-    col2_one = col2.button("CUSTOM MODEL", key="2")
-    if col1_one or session_state.col1:
-        session_state.col1 = True
-        session_state.col2 = False
-        choose_InputType = st.selectbox("Choose Input type :", options=['Video', 'Image'], index=1, key='input-roboflow')
+    col1_one = col1.button("ROBOFLOW TRAIN", key="button_one")
+    col2_one = col2.button("CUSTOM MODEL", key="button_two")
+    if col1_one or (st.session_state.button_one == 'ROBOFLOW TRAIN'):
+        st.write("Inference on a model trained with Roboflow Train")
+        choose_InputType = st.selectbox("Choose Input type :", options=['Video', 'Image'], index=1, key='input_roboflow')
+        initial_state = st.session_state.input_roboflow
         if choose_InputType == 'Video':
             st.write("Inference on a video feed")
             feed_type = 'video'
@@ -91,11 +87,9 @@ def object_detection():
             st.write("Inference on a local image")
             feed_type = 'image'
 
-    if col2_one or session_state.col2:
-        session_state.col1 = False
-        session_state.col2 = True
+    if col2_one or (st.session_state.button_two == 'CUSTOM MODEL'):
         st.write("Inference on a custom-trained model")
-        choose_InputType_custom = st.selectbox("Choose Input type :", options=['Video', 'Image'], index=1, key='input-custom')
+        choose_InputType_custom = st.selectbox("Choose Input type :", options=['Video', 'Image'], index=1, key='input_custom')
         if choose_InputType_custom == 'Video':
             st.write("Inference on a video feed")
             feed_type = 'video'
