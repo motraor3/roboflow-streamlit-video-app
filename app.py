@@ -73,7 +73,8 @@ def object_detection():
     ##########
 
     st.sidebar.write("### Roboflow: Face Detection App")
-    col1, col2 = st.beta_columns(2)
+    feed_type = ''
+    col1, col2 = st.columns(2)
     col1_one = col1.button("ROBOFLOW TRAIN", key="button_one")
     col2_one = col2.button("CUSTOM MODEL", key="button_two")
     if col1_one or (st.session_state.button_one == 'ROBOFLOW TRAIN'):
